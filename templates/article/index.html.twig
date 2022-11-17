@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
+<script>
+$(function() {
+    $('#myTable').DataTable();
+});
+</script>
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <span class="fs-4">Articles</span>
+    </a>
+
+    <ul class="nav nav-pills">      
+         
+        <li class="ml-3 nav-item"><a href="/logout" class="btn btn-danger"> Logout</a></li>
+    </ul>
+  </header>    
+    <table id="myTable" class="table">
+        <thead>
+            <tr>
+                <th>Picture</th>
+                <th>Title</th>
+                <th>Short Description</th>
+                <th>Date Added </th>
+                {% if app.user.roles[0] == 'ROLE_ADMIN' %}
+                    <th>Action</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {%  for article  in articles  %}
+                <tr>
+                    <td><img src="{{ article.picture }}" heigth="50" width="60"/></td>
+                    <td>{{article.title}}</td>
+                    <td>{{article.shortDescription}}</td>
+                    <td>{{article.dateAdded}}</td>
+                    {% if app.user.roles[0] == 'ROLE_ADMIN' %}
+                        <td>
+                            <a 
+                                href="/article/delete/{{article.id}}"
+                                class="btn btn-danger">
+                                Delete
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+{% endblock %}
