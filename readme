@@ -1,1 +1,2 @@
-# CLI COMMAND - symfony console run-parser
+ #App Cake Task ## CLI COMMAND symfony console run-parser ## User Accounts command: symfony console doctrine:fixtures:load 'email'=>'ikenna@email.com', 'role' => 'ROLE_ADMIN', 'password' => '12345678', 'email'=>'edmund@email.com', 'role' => null, 'password'
+=> '12345678'
